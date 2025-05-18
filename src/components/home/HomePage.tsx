@@ -231,8 +231,8 @@ const HomePage = () => {
     autoplaySpeed: 6000,
     arrows: false,
     fade: true,
-    beforeChange: (current, next) => setActiveSlide(next),
-    customPaging: (i) => (
+    beforeChange: (current: number, next: number) => setActiveSlide(next),
+    customPaging: (i: number) => (
       <Box
         sx={{
           width: 12,
@@ -245,7 +245,7 @@ const HomePage = () => {
         }}
       />
     ),
-    appendDots: dots => (
+    appendDots: (dots: React.ReactNode) => (
       <Box
         sx={{
           position: 'absolute',
@@ -656,7 +656,8 @@ const HomePage = () => {
         </Box>
         
         {/* Custom CSS for animations */}
-        <style jsx="true">{`
+        <style>
+          {`
           @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
               transform: translateY(0) translateX(-50%);
@@ -690,7 +691,8 @@ const HomePage = () => {
               transform: translateY(0);
             }
           }
-        `}</style>
+        `}
+        </style>
       </Box>
 
       {/* Stats Section */}
@@ -720,7 +722,7 @@ const HomePage = () => {
         <Container maxWidth="xl">
           <Grid container spacing={4} justifyContent="center">
             {stats.map((stat, index) => (
-              <Grid item xs={6} md={3} key={index}>
+              <Grid size={{ xs: 6, md: 3 }} key={index}>
                 <Zoom in={animatedStats} style={{ transitionDelay: `${index * 150}ms` }}>
                   <Box sx={{ 
                     textAlign: 'center',
@@ -818,7 +820,7 @@ const HomePage = () => {
 
           <Grid container spacing={4}>
             {programs.map((program) => (
-              <Grid item xs={12} sm={6} md={3} key={program.id}>
+              <Grid size={{ xs: 12, sm: 6, md: 3 }} key={program.id}>
                 <Card 
                   sx={{ 
                     height: '100%', 
@@ -989,7 +991,7 @@ const HomePage = () => {
 
           <Grid container spacing={4}>
             {systemFeatures.map((feature, index) => (
-              <Grid item xs={12} sm={6} md={4} key={feature.id}>
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={feature.id}>
                 <Slide direction={index % 2 === 0 ? "right" : "left"} in={true} mountOnEnter unmountOnExit timeout={(index + 1) * 200}>
                   <Paper 
                     sx={{ 
@@ -1090,7 +1092,7 @@ const HomePage = () => {
       }}>
         <Container maxWidth="xl">
           <Grid container spacing={6} alignItems="center">
-            <Grid item xs={12} md={6}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Box sx={{ position: 'relative' }}>
                 <Box 
                   component="img"
@@ -1143,7 +1145,7 @@ const HomePage = () => {
                 </IconButton>
               </Box>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <Box>
                 <Typography 
                   variant="overline" 
@@ -1419,7 +1421,7 @@ const HomePage = () => {
           </Box>
 
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
               <Box sx={{ 
                 position: 'relative',
                 overflow: 'hidden',
@@ -1454,7 +1456,7 @@ const HomePage = () => {
                 }} />
               </Box>
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
               <Box sx={{ 
                 position: 'relative',
                 overflow: 'hidden',
@@ -1489,7 +1491,7 @@ const HomePage = () => {
                 }} />
               </Box>
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
               <Box sx={{ 
                 position: 'relative',
                 overflow: 'hidden',
@@ -1524,7 +1526,7 @@ const HomePage = () => {
                 }} />
               </Box>
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
               <Box sx={{ 
                 position: 'relative',
                 overflow: 'hidden',
@@ -1614,7 +1616,7 @@ const HomePage = () => {
       }}>
         <Container maxWidth="xl">
           <Grid container spacing={6} alignItems="center">
-            <Grid item xs={12} md={7}>
+            <Grid size={{ xs: 12, md: 7 }}>
               <Box sx={{ position: 'relative', zIndex: 1 }}>
                 <Typography 
                   variant="h2" 
@@ -1638,7 +1640,7 @@ const HomePage = () => {
                   Take the first step towards sporting excellence today! Contact us to learn more about our programs or to schedule a visit.
                 </Typography>
                 <Grid container spacing={4}>
-                  <Grid item xs={12} sm={4}>
+                  <Grid size={{ xs: 12, sm: 4 }}>
                     <Stack spacing={2} alignItems="center" sx={{ textAlign: 'center' }}>
                       <IconButton 
                         sx={{ 
@@ -1661,7 +1663,7 @@ const HomePage = () => {
                       </Typography>
                     </Stack>
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid size={{ xs: 12, sm: 4 }}>
                     <Stack spacing={2} alignItems="center" sx={{ textAlign: 'center' }}>
                       <IconButton 
                         sx={{ 
@@ -1684,7 +1686,7 @@ const HomePage = () => {
                       </Typography>
                     </Stack>
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid size={{ xs: 12, sm: 4 }}>
                     <Stack spacing={2} alignItems="center" sx={{ textAlign: 'center' }}>
                       <IconButton 
                         sx={{ 
@@ -1710,7 +1712,7 @@ const HomePage = () => {
                 </Grid>
               </Box>
             </Grid>
-            <Grid item xs={12} md={5}>
+            <Grid size={{ xs: 12, md: 5 }}>
               <Paper 
                 sx={{ 
                   p: 4, 
