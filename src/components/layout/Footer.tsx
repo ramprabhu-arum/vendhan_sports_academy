@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
     >
       <Container maxWidth="lg">
         <Grid container spacing={4}>
-          <Grid xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Typography variant="h6" gutterBottom>
               Vendhan Sports Academy
             </Typography>
@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
             </Typography>
           </Grid>
           
-          <Grid xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Typography variant="h6" gutterBottom>
               Contact Us
             </Typography>
@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
             </Typography>
           </Grid>
           
-          <Grid xs={12} sm={4}>
+          <Grid item xs={12} sm={4}>
             <Typography variant="h6" gutterBottom>
               Quick Links
             </Typography>
