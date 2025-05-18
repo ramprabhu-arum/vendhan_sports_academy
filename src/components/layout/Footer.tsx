@@ -30,14 +30,13 @@ const Footer: React.FC = () => {
               Contact Us
             </Typography>
             <Typography variant="body2">
-              123 Sports Avenue<br />
-              Chennai, Tamil Nadu 600001<br />
+              Oddanchatram, Tamil Nadu<br />
               India<br />
-              <Link href="mailto:info@vendhansports.com" color="inherit">
-                info@vendhansports.com
-              </Link><br />
-              <Link href="tel:+919876543210" color="inherit">
-                +91 98765 43210
+              <Link href="tel:+918608649937" color="inherit">
+                8608649937
+              </Link>,{' '}
+              <Link href="tel:+919566672112" color="inherit">
+                9566672112
               </Link>
             </Typography>
           </Grid>

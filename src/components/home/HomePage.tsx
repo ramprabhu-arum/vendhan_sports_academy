@@ -30,20 +30,40 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 
-// Import placeholder images for development
-// These will be replaced with actual images in production
-const badmintonImage = 'https://source.unsplash.com/random/800x600/?badminton';
-const yogaImage = 'https://source.unsplash.com/random/800x600/?yoga';
-const summerCampImage = 'https://source.unsplash.com/random/800x600/?summer-camp';
-const logoImage = 'https://source.unsplash.com/random/800x600/?sports-logo';
-const coachImage = 'https://source.unsplash.com/random/800x600/?coach';
-const heroImage = 'https://source.unsplash.com/random/1600x900/?sports-academy';
-const galleryImage1 = 'https://source.unsplash.com/random/800x600/?football';
-const galleryImage2 = 'https://source.unsplash.com/random/800x600/?boxing';
-const galleryImage3 = 'https://source.unsplash.com/random/800x600/?sports';
-const galleryImage4 = 'https://source.unsplash.com/random/800x600/?training';
-const galleryImage5 = 'https://source.unsplash.com/random/800x600/?fitness';
-const galleryImage6 = 'https://source.unsplash.com/random/800x600/?athletics';
+// Use public URLs for images to ensure they work across all environments
+const badmintonImage = '/images/badminton.jpg';
+const yogaImage = '/images/yoga.jpg';
+const summerCampImage = '/images/summer-camp.jpg';
+const coachImage = '/images/coach.jpg';
+const heroImage = '/images/hero.jpg';
+const galleryImage1 = '/images/gallery1.jpg';
+const galleryImage2 = '/images/gallery2.jpg';
+const galleryImage3 = '/images/gallery3.jpg';
+const galleryImage4 = '/images/gallery4.jpg';
+const galleryImage5 = '/images/gallery5.jpg';
+const galleryImage6 = '/images/gallery6.jpg';
+
+// Fallback images from Unsplash in case local images are not available
+const fallbackImages = {
+  badminton: 'https://source.unsplash.com/random/800x600/?badminton',
+  yoga: 'https://source.unsplash.com/random/800x600/?yoga',
+  summerCamp: 'https://source.unsplash.com/random/800x600/?summer-camp',
+  coach: 'https://source.unsplash.com/random/800x600/?coach',
+  hero: 'https://source.unsplash.com/random/1600x900/?sports-academy',
+  gallery1: 'https://source.unsplash.com/random/800x600/?football',
+  gallery2: 'https://source.unsplash.com/random/800x600/?boxing',
+  gallery3: 'https://source.unsplash.com/random/800x600/?sports',
+  gallery4: 'https://source.unsplash.com/random/800x600/?training',
+  gallery5: 'https://source.unsplash.com/random/800x600/?fitness',
+  gallery6: 'https://source.unsplash.com/random/800x600/?athletics'
+};
+
+// Helper function to handle image errors
+const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>, fallbackSrc: string) => {
+  const target = e.target as HTMLImageElement;
+  target.onerror = null; // Prevent infinite loop
+  target.src = fallbackSrc;
+};
 
 const programs = [
   {
@@ -51,6 +71,7 @@ const programs = [
     title: "Badminton Training",
     description: "Professional badminton coaching with focus on fundamental techniques, footwork, and shot selection.",
     imageUrl: badmintonImage,
+    fallbackUrl: fallbackImages.badminton,
     time: "6:30 AM - 8:00 AM",
     icon: <SportsTennisIcon />
   },
@@ -59,6 +80,7 @@ const programs = [
     title: "Yoga Classes",
     description: "Daily yoga sessions to improve flexibility, strength, and mental focus for athletes of all levels.",
     imageUrl: yogaImage,
+    fallbackUrl: fallbackImages.yoga,
     time: "6:00 AM - 7:00 AM",
     icon: <SportsKabaddiIcon />
   },
@@ -67,6 +89,7 @@ const programs = [
     title: "Football Training",
     description: "Comprehensive football training program focusing on skills, strategy, and teamwork.",
     imageUrl: galleryImage1,
+    fallbackUrl: fallbackImages.gallery1,
     time: "8:00 AM - 9:30 AM",
     icon: <SportsSoccerIcon />
   },
@@ -75,6 +98,7 @@ const programs = [
     title: "Boxing Classes",
     description: "Learn boxing techniques, conditioning, and strategic aspects under expert guidance.",
     imageUrl: galleryImage3,
+    fallbackUrl: fallbackImages.gallery3,
     time: "6:30 AM - 8:00 AM",
     icon: <FitnessCenterIcon />
   }
@@ -131,7 +155,7 @@ const HomePage = () => {
               sx={{ 
                 height: { xs: '70vh', md: '85vh' },
                 position: 'relative',
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${heroImage})`,
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${fallbackImages.hero})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 display: 'flex',
@@ -213,7 +237,7 @@ const HomePage = () => {
               sx={{ 
                 height: { xs: '70vh', md: '85vh' },
                 position: 'relative',
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${summerCampImage})`,
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${fallbackImages.summerCamp})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 display: 'flex',
@@ -408,7 +432,7 @@ const HomePage = () => {
                 borderRadius: 2
               }}>
                 <Avatar 
-                  src={coachImage} 
+                  src={fallbackImages.coach} 
                   alt="Dr. T. Ganesh Babu"
                   sx={{ 
                     width: 150, 
@@ -506,9 +530,10 @@ const HomePage = () => {
                   <CardMedia
                     component="img"
                     height="220"
-                    image={program.imageUrl}
+                    image={program.fallbackUrl}
                     alt={program.title}
                     sx={{ objectFit: 'cover' }}
+                    onError={(e) => handleImageError(e, program.fallbackUrl)}
                   />
                   <CardContent sx={{ flexGrow: 1, p: 3 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -606,7 +631,14 @@ const HomePage = () => {
         </Box>
 
         <Slider {...gallerySettings}>
-          {[galleryImage1, galleryImage2, galleryImage3, galleryImage4, galleryImage5, galleryImage6].map((image, index) => (
+          {[
+            { src: fallbackImages.gallery1, alt: "Football training" },
+            { src: fallbackImages.gallery2, alt: "Boxing class" },
+            { src: fallbackImages.gallery3, alt: "Sports activities" },
+            { src: fallbackImages.gallery4, alt: "Training session" },
+            { src: fallbackImages.gallery5, alt: "Fitness program" },
+            { src: fallbackImages.gallery6, alt: "Athletics training" }
+          ].map((image, index) => (
             <Box key={index} sx={{ px: 1 }}>
               <Paper 
                 elevation={3} 
@@ -620,8 +652,8 @@ const HomePage = () => {
                 }}
               >
                 <img 
-                  src={image} 
-                  alt={`Gallery image ${index + 1}`} 
+                  src={image.src} 
+                  alt={image.alt} 
                   style={{ 
                     width: '100%', 
                     height: '220px', 
@@ -656,7 +688,7 @@ const HomePage = () => {
       <Box 
         sx={{ 
           py: 8,
-          background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(${yogaImage})`,
+          background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(${fallbackImages.yoga})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: 'white',
