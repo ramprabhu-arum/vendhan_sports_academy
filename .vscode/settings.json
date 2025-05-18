@@ -1,0 +1,9 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}",
+        ".git{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/{subscription-id}/resourceGroups/vendhan-sports-academy-rg/providers/Microsoft.Web/sites/vendhan-sports-academy",
+    "appService.deploySubpath": "build"
+}
