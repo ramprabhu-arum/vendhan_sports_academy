@@ -151,7 +151,7 @@ const HomePage: React.FC<{ programs: Program[] }> = ({ programs }) => {
       {/* Programs Section */}
       <Grid container spacing={4}>
         {programs.map((program) => (
-          <Grid item xs={12} sm={6} md={3} key={program.id}>
+          <Grid component="div" xs={12} sm={6} md={3} key={program.id}>
             <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
               <CardMedia
                 component="img"
@@ -180,7 +180,7 @@ const HomePage: React.FC<{ programs: Program[] }> = ({ programs }) => {
 
       {/* Facilities Section */}
       <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
+        <Grid component="div" xs={12} md={6}>
           <Box sx={{ height: '100%' }}>
             <img 
               src="/placeholder-facilities.jpg" 
@@ -189,7 +189,7 @@ const HomePage: React.FC<{ programs: Program[] }> = ({ programs }) => {
             />
           </Box>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid component="div" xs={12} md={6}>
           <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'center' }}>
             <Typography variant="h4" gutterBottom>
               State-of-the-Art Infrastructure
