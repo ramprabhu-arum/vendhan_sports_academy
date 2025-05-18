@@ -12,25 +12,33 @@ import {
   useMediaQuery,
   Paper,
   Avatar,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText
+  Divider,
+  Stack,
+  IconButton
 } from '@mui/material';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
-import SportsBaseballIcon from '@mui/icons-material/SportsBaseball';
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import QrCodeIcon from '@mui/icons-material/QrCode';
+import EventIcon from '@mui/icons-material/Event';
+import PaymentIcon from '@mui/icons-material/Payment';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import LoginIcon from '@mui/icons-material/Login';
 
 // Directly use Unsplash URLs for guaranteed image display
-const fallbackImages = {
+const images = {
   badminton: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
   yoga: 'https://images.unsplash.com/photo-1599447292461-69e1a6704d63?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
   summerCamp: 'https://images.unsplash.com/photo-1526976668912-1a811878dd37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
@@ -41,7 +49,11 @@ const fallbackImages = {
   gallery3: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
   gallery4: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80',
   gallery5: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
-  gallery6: 'https://images.unsplash.com/photo-1502904550040-7534597429ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80'
+  gallery6: 'https://images.unsplash.com/photo-1502904550040-7534597429ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
+  booking: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  attendance: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  events: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80',
+  admin: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
 };
 
 const programs = [
@@ -49,7 +61,7 @@ const programs = [
     id: 1,
     title: "Badminton Training",
     description: "Professional badminton coaching with focus on fundamental techniques, footwork, and shot selection.",
-    imageUrl: fallbackImages.badminton,
+    imageUrl: images.badminton,
     time: "6:30 AM - 8:00 AM",
     icon: <SportsTennisIcon />
   },
@@ -57,7 +69,7 @@ const programs = [
     id: 2,
     title: "Yoga Classes",
     description: "Daily yoga sessions to improve flexibility, strength, and mental focus for athletes of all levels.",
-    imageUrl: fallbackImages.yoga,
+    imageUrl: images.yoga,
     time: "6:00 AM - 7:00 AM",
     icon: <SportsKabaddiIcon />
   },
@@ -65,7 +77,7 @@ const programs = [
     id: 3,
     title: "Football Training",
     description: "Comprehensive football training program focusing on skills, strategy, and teamwork.",
-    imageUrl: fallbackImages.gallery1,
+    imageUrl: images.gallery1,
     time: "8:00 AM - 9:30 AM",
     icon: <SportsSoccerIcon />
   },
@@ -73,9 +85,86 @@ const programs = [
     id: 4,
     title: "Boxing Classes",
     description: "Learn boxing techniques, conditioning, and strategic aspects under expert guidance.",
-    imageUrl: fallbackImages.gallery3,
+    imageUrl: images.gallery3,
     time: "6:30 AM - 8:00 AM",
     icon: <FitnessCenterIcon />
+  }
+];
+
+// Core system features
+const systemFeatures = [
+  {
+    id: 1,
+    title: "Member Registration",
+    description: "Register as a new member with email verification and create your personalized profile.",
+    icon: <PersonAddIcon fontSize="large" />,
+    color: "#2196f3",
+    path: "/register"
+  },
+  {
+    id: 2,
+    title: "Court Booking",
+    description: "Book courts and facilities with our easy-to-use calendar-based reservation system.",
+    icon: <CalendarMonthIcon fontSize="large" />,
+    color: "#4caf50",
+    path: "/booking"
+  },
+  {
+    id: 3,
+    title: "Attendance Tracking",
+    description: "Check in and track your attendance with our QR code-based attendance system.",
+    icon: <QrCodeIcon fontSize="large" />,
+    color: "#ff9800",
+    path: "/attendance"
+  },
+  {
+    id: 4,
+    title: "Event Registration",
+    description: "Browse and register for upcoming tournaments, workshops, and special events.",
+    icon: <EventIcon fontSize="large" />,
+    color: "#e91e63",
+    path: "/events"
+  },
+  {
+    id: 5,
+    title: "Fee Management",
+    description: "View payment history, outstanding dues, and make secure online payments.",
+    icon: <PaymentIcon fontSize="large" />,
+    color: "#9c27b0",
+    path: "/payments"
+  },
+  {
+    id: 6,
+    title: "Member Dashboard",
+    description: "Access your personalized dashboard with attendance, bookings, and event participation.",
+    icon: <DashboardIcon fontSize="large" />,
+    color: "#3f51b5",
+    path: "/dashboard"
+  }
+];
+
+// Admin features
+const adminFeatures = [
+  {
+    id: 1,
+    title: "Admin Portal",
+    description: "Comprehensive management tools for members, facilities, events, and content.",
+    icon: <AdminPanelSettingsIcon fontSize="large" />,
+    color: "#607d8b"
+  },
+  {
+    id: 2,
+    title: "Notifications",
+    description: "Send targeted communications and alerts to members via email and in-app notifications.",
+    icon: <NotificationsActiveIcon fontSize="large" />,
+    color: "#ff5722"
+  },
+  {
+    id: 3,
+    title: "Reports & Analytics",
+    description: "Generate detailed reports on attendance, facility usage, payments, and member activity.",
+    icon: <BarChartIcon fontSize="large" />,
+    color: "#795548"
   }
 ];
 
@@ -130,7 +219,7 @@ const HomePage = () => {
               sx={{ 
                 height: { xs: '70vh', md: '85vh' },
                 position: 'relative',
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${fallbackImages.hero})`,
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${images.hero})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 display: 'flex',
@@ -166,41 +255,38 @@ const HomePage = () => {
                       fontWeight: 500
                     }}
                   >
-                    Nurturing champions through expert coaching and world-class facilities in Oddanchatram
+                    Complete sports management system for members, coaches, and administrators
                   </Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
                     <Button 
                       variant="contained" 
                       color="secondary" 
                       size="large"
+                      startIcon={<PersonAddIcon />}
                       sx={{ 
                         py: 1.5, 
                         px: 3, 
                         fontWeight: 'bold',
                         fontSize: '1rem'
                       }}
-                      href="/programs"
+                      href="/register"
                     >
-                      Explore Programs
+                      Register Now
                     </Button>
                     <Button 
-                      variant="outlined" 
+                      variant="contained"
+                      color="primary"
                       size="large"
+                      startIcon={<LoginIcon />}
                       sx={{ 
                         py: 1.5, 
                         px: 3, 
                         fontWeight: 'bold',
-                        fontSize: '1rem',
-                        color: 'white',
-                        borderColor: 'white',
-                        '&:hover': {
-                          borderColor: 'white',
-                          backgroundColor: 'rgba(255,255,255,0.1)'
-                        }
+                        fontSize: '1rem'
                       }}
-                      href="/contact"
+                      href="/login"
                     >
-                      Contact Us
+                      Member Login
                     </Button>
                   </Box>
                 </Box>
@@ -212,7 +298,7 @@ const HomePage = () => {
               sx={{ 
                 height: { xs: '70vh', md: '85vh' },
                 position: 'relative',
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${fallbackImages.summerCamp})`,
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${images.booking})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 display: 'flex',
@@ -238,7 +324,7 @@ const HomePage = () => {
                       color: theme.palette.secondary.main
                     }}
                   >
-                    Summer Camp 2025
+                    Court Booking System
                   </Typography>
                   <Typography 
                     variant="h5" 
@@ -248,22 +334,23 @@ const HomePage = () => {
                       fontWeight: 500
                     }}
                   >
-                    Join our comprehensive summer program featuring sports, yoga, and cultural activities for children
+                    Reserve courts and facilities with our easy-to-use online booking system
                   </Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
                     <Button 
                       variant="contained" 
                       color="secondary" 
                       size="large"
+                      startIcon={<CalendarMonthIcon />}
                       sx={{ 
                         py: 1.5, 
                         px: 3, 
                         fontWeight: 'bold',
                         fontSize: '1rem'
                       }}
-                      href="/summer-camp"
+                      href="/booking"
                     >
-                      Register Now
+                      Book Now
                     </Button>
                     <Button 
                       variant="outlined" 
@@ -280,9 +367,92 @@ const HomePage = () => {
                           backgroundColor: 'rgba(255,255,255,0.1)'
                         }
                       }}
-                      href="/schedule"
+                      href="/facilities"
                     >
-                      View Schedule
+                      View Facilities
+                    </Button>
+                  </Box>
+                </Box>
+              </Container>
+            </Box>
+          </Box>
+          <Box>
+            <Box 
+              sx={{ 
+                height: { xs: '70vh', md: '85vh' },
+                position: 'relative',
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${images.events})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Container maxWidth="lg">
+                <Box sx={{ 
+                  textAlign: 'left', 
+                  color: 'white', 
+                  p: { xs: 2, md: 4 },
+                  maxWidth: { xs: '100%', md: '60%' }
+                }}>
+                  <Typography 
+                    variant="h1" 
+                    component="h1" 
+                    gutterBottom
+                    sx={{ 
+                      fontSize: { xs: '2.5rem', md: '4rem' },
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      color: theme.palette.secondary.main
+                    }}
+                  >
+                    Events & Tournaments
+                  </Typography>
+                  <Typography 
+                    variant="h5" 
+                    sx={{ 
+                      mb: 4,
+                      fontSize: { xs: '1.2rem', md: '1.5rem' },
+                      fontWeight: 500
+                    }}
+                  >
+                    Register for upcoming tournaments, workshops, and special events
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                    <Button 
+                      variant="contained" 
+                      color="secondary" 
+                      size="large"
+                      startIcon={<EventIcon />}
+                      sx={{ 
+                        py: 1.5, 
+                        px: 3, 
+                        fontWeight: 'bold',
+                        fontSize: '1rem'
+                      }}
+                      href="/events"
+                    >
+                      View Events
+                    </Button>
+                    <Button 
+                      variant="outlined" 
+                      size="large"
+                      sx={{ 
+                        py: 1.5, 
+                        px: 3, 
+                        fontWeight: 'bold',
+                        fontSize: '1rem',
+                        color: 'white',
+                        borderColor: 'white',
+                        '&:hover': {
+                          borderColor: 'white',
+                          backgroundColor: 'rgba(255,255,255,0.1)'
+                        }
+                      }}
+                      href="/calendar"
+                    >
+                      Event Calendar
                     </Button>
                   </Box>
                 </Box>
@@ -292,7 +462,7 @@ const HomePage = () => {
         </Slider>
       </Box>
 
-      {/* About Section */}
+      {/* System Features Section */}
       <Container maxWidth="lg" sx={{ mb: 8 }}>
         <Box sx={{ textAlign: 'center', mb: 6 }}>
           <Typography 
@@ -316,7 +486,7 @@ const HomePage = () => {
               }
             }}
           >
-            About Vendhan Sports Academy
+            Sports Management System
           </Typography>
           <Typography 
             variant="body1" 
@@ -328,55 +498,77 @@ const HomePage = () => {
               lineHeight: 1.8
             }}
           >
-            Established in Oddanchatram, Vendhan Sports Academy has been at the forefront of sports education and training. 
-            Our mission is to discover, nurture, and develop sporting talent across various disciplines including Badminton, 
-            Yoga, Football, Boxing, and more. Led by Dr. T. Ganesh Babu, our academy provides expert coaching with focus on 
-            fundamental techniques, conditioning, and strategic mental aspects.
+            Our comprehensive sports management system streamlines member registration, court bookings, 
+            attendance tracking, event management, and fee payments. Access all features through our 
+            user-friendly web portal.
           </Typography>
         </Box>
 
-        {/* Coach Profile - Removed "Our Approach" section as requested */}
-        <Box sx={{ 
-          p: 4, 
-          borderRadius: 2,
-          boxShadow: 3,
-          backgroundColor: theme.palette.background.paper,
-          maxWidth: '800px',
-          mx: 'auto'
-        }}>
-          <Box sx={{ 
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center'
-          }}>
-            <Avatar 
-              src={fallbackImages.coach} 
-              alt="Dr. T. Ganesh Babu"
-              sx={{ 
-                width: 150, 
-                height: 150, 
-                mb: 2,
-                border: `4px solid ${theme.palette.secondary.main}`
-              }}
-            />
-            <Typography variant="h5" gutterBottom sx={{ fontWeight: 600 }}>
-              Dr. T. Ganesh Babu
-            </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              B.P.E., M.P.Ed., M.Phil., Ph.D., PG Dip Yoga, PG Dip (S.Psy), CNSNIS (Football)
-            </Typography>
-            <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
-              "Our coaching philosophy focuses on developing not just athletic skills, but also character, discipline, and sportsmanship."
-            </Typography>
-          </Box>
-        </Box>
+        <Grid container spacing={3}>
+          {systemFeatures.map((feature) => (
+            <Grid key={feature.id} sx={{ gridColumn: { xs: 'span 12', sm: 'span 6', md: 'span 4' } }}>
+              <Card 
+                sx={{ 
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: 'transform 0.3s, box-shadow 0.3s',
+                  '&:hover': {
+                    transform: 'translateY(-8px)',
+                    boxShadow: 6
+                  }
+                }}
+              >
+                <Box 
+                  sx={{ 
+                    p: 3, 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    alignItems: 'center',
+                    backgroundColor: feature.color,
+                    color: 'white'
+                  }}
+                >
+                  <Avatar 
+                    sx={{ 
+                      bgcolor: 'white', 
+                      color: feature.color,
+                      width: 70,
+                      height: 70,
+                      mb: 2
+                    }}
+                  >
+                    {feature.icon}
+                  </Avatar>
+                  <Typography variant="h5" component="h3" align="center" sx={{ fontWeight: 600 }}>
+                    {feature.title}
+                  </Typography>
+                </Box>
+                <CardContent sx={{ flexGrow: 1, p: 3 }}>
+                  <Typography variant="body1" color="text.secondary" paragraph>
+                    {feature.description}
+                  </Typography>
+                  <Button 
+                    variant="outlined" 
+                    color="primary" 
+                    fullWidth
+                    sx={{ mt: 2, fontWeight: 'bold' }}
+                    href={feature.path}
+                  >
+                    Access Feature
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </Container>
 
-      {/* Programs Section */}
+      {/* Admin Features Section */}
       <Box sx={{ 
         py: 8, 
-        backgroundColor: theme.palette.grey[100],
+        backgroundColor: theme.palette.grey[900],
+        color: 'white',
         position: 'relative',
         '&:before': {
           content: '""',
@@ -387,6 +579,103 @@ const HomePage = () => {
           height: '5px',
           background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`
         }
+      }}>
+        <Container maxWidth="lg">
+          <Box sx={{ textAlign: 'center', mb: 6 }}>
+            <Typography 
+              variant="h2" 
+              component="h2" 
+              gutterBottom
+              sx={{ 
+                fontSize: { xs: '2rem', md: '3rem' },
+                fontWeight: 700,
+                position: 'relative',
+                display: 'inline-block',
+                '&:after': {
+                  content: '""',
+                  position: 'absolute',
+                  bottom: '-10px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: '80px',
+                  height: '4px',
+                  backgroundColor: theme.palette.secondary.main
+                }
+              }}
+            >
+              Admin & Management Tools
+            </Typography>
+            <Typography 
+              variant="body1" 
+              sx={{ 
+                maxWidth: '800px', 
+                mx: 'auto', 
+                mt: 4,
+                fontSize: '1.1rem',
+                opacity: 0.9
+              }}
+            >
+              Powerful administrative tools for coaches and staff to manage members, track attendance, 
+              organize events, and analyze performance metrics.
+            </Typography>
+          </Box>
+
+          <Grid container spacing={4} justifyContent="center">
+            {adminFeatures.map((feature) => (
+              <Grid key={feature.id} sx={{ gridColumn: { xs: 'span 12', sm: 'span 6', md: 'span 4' } }}>
+                <Paper 
+                  sx={{ 
+                    p: 4, 
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                    backgroundColor: 'rgba(255,255,255,0.05)',
+                    backdropFilter: 'blur(10px)',
+                    transition: 'transform 0.3s',
+                    '&:hover': {
+                      transform: 'translateY(-8px)',
+                      backgroundColor: 'rgba(255,255,255,0.1)',
+                    }
+                  }}
+                >
+                  <Avatar 
+                    sx={{ 
+                      bgcolor: feature.color, 
+                      width: 80,
+                      height: 80,
+                      mb: 2
+                    }}
+                  >
+                    {feature.icon}
+                  </Avatar>
+                  <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
+                    {feature.title}
+                  </Typography>
+                  <Typography variant="body1" sx={{ mb: 3, opacity: 0.8 }}>
+                    {feature.description}
+                  </Typography>
+                  <Button 
+                    variant="contained" 
+                    color="secondary"
+                    sx={{ mt: 'auto', fontWeight: 'bold' }}
+                    href="/admin"
+                  >
+                    Admin Login
+                  </Button>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Programs Section */}
+      <Box sx={{ 
+        py: 8, 
+        backgroundColor: theme.palette.grey[100],
+        position: 'relative'
       }}>
         <Container maxWidth="lg">
           <Box sx={{ textAlign: 'center', mb: 6 }}>
@@ -506,6 +795,117 @@ const HomePage = () => {
         </Container>
       </Box>
 
+      {/* About Section with Coach */}
+      <Container maxWidth="lg" sx={{ my: 8 }}>
+        <Grid container spacing={4} alignItems="center">
+          <Grid sx={{ gridColumn: { xs: 'span 12', md: 'span 6' } }}>
+            <Box sx={{ p: { xs: 2, md: 4 } }}>
+              <Typography 
+                variant="h2" 
+                component="h2" 
+                gutterBottom
+                sx={{ 
+                  fontSize: { xs: '2rem', md: '3rem' },
+                  fontWeight: 700,
+                  position: 'relative',
+                  display: 'inline-block',
+                  '&:after': {
+                    content: '""',
+                    position: 'absolute',
+                    bottom: '-10px',
+                    left: 0,
+                    width: '80px',
+                    height: '4px',
+                    backgroundColor: theme.palette.secondary.main
+                  }
+                }}
+              >
+                About Vendhan Sports Academy
+              </Typography>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  mt: 4,
+                  fontSize: '1.1rem',
+                  lineHeight: 1.8,
+                  mb: 3
+                }}
+              >
+                Established in Oddanchatram, Vendhan Sports Academy has been at the forefront of sports education and training. 
+                Our mission is to discover, nurture, and develop sporting talent across various disciplines including Badminton, 
+                Yoga, Football, Boxing, and more.
+              </Typography>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  fontSize: '1.1rem',
+                  lineHeight: 1.8,
+                  mb: 3
+                }}
+              >
+                Led by Dr. T. Ganesh Babu, our academy provides expert coaching with focus on fundamental techniques, 
+                conditioning, and strategic mental aspects. Our state-of-the-art facilities and comprehensive management 
+                system ensure the best experience for our members.
+              </Typography>
+              <Button 
+                variant="contained" 
+                color="primary"
+                size="large"
+                sx={{ 
+                  mt: 2,
+                  py: 1.5, 
+                  px: 3, 
+                  fontWeight: 'bold',
+                  fontSize: '1rem'
+                }}
+                href="/about"
+              >
+                Learn More About Us
+              </Button>
+            </Box>
+          </Grid>
+          <Grid sx={{ gridColumn: { xs: 'span 12', md: 'span 6' } }}>
+            <Box sx={{ 
+              p: 4, 
+              borderRadius: 2,
+              boxShadow: 3,
+              backgroundColor: theme.palette.background.paper,
+            }}>
+              <Box sx={{ 
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center'
+              }}>
+                <Avatar 
+                  src={images.coach} 
+                  alt="Dr. T. Ganesh Babu"
+                  sx={{ 
+                    width: 180, 
+                    height: 180, 
+                    mb: 3,
+                    border: `4px solid ${theme.palette.secondary.main}`
+                  }}
+                />
+                <Typography variant="h4" gutterBottom sx={{ fontWeight: 600 }}>
+                  Dr. T. Ganesh Babu
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
+                  Director & Head Coach
+                </Typography>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+                  B.P.E., M.P.Ed., M.Phil., Ph.D., PG Dip Yoga, PG Dip (S.Psy), CNSNIS (Football)
+                </Typography>
+                <Divider sx={{ width: '100%', mb: 3 }} />
+                <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
+                  "Our coaching philosophy focuses on developing not just athletic skills, but also character, discipline, and sportsmanship."
+                </Typography>
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+
       {/* Gallery Section */}
       <Container maxWidth="lg" sx={{ my: 8 }}>
         <Box sx={{ textAlign: 'center', mb: 6 }}>
@@ -548,12 +948,12 @@ const HomePage = () => {
 
         <Slider {...gallerySettings}>
           {[
-            { src: fallbackImages.gallery1, alt: "Football training" },
-            { src: fallbackImages.gallery2, alt: "Boxing class" },
-            { src: fallbackImages.gallery3, alt: "Sports activities" },
-            { src: fallbackImages.gallery4, alt: "Training session" },
-            { src: fallbackImages.gallery5, alt: "Fitness program" },
-            { src: fallbackImages.gallery6, alt: "Athletics training" }
+            { src: images.gallery1, alt: "Football training" },
+            { src: images.gallery2, alt: "Boxing class" },
+            { src: images.gallery3, alt: "Sports activities" },
+            { src: images.gallery4, alt: "Training session" },
+            { src: images.gallery5, alt: "Fitness program" },
+            { src: images.gallery6, alt: "Athletics training" }
           ].map((image, index) => (
             <Box key={index} sx={{ px: 1 }}>
               <Paper 
@@ -604,7 +1004,7 @@ const HomePage = () => {
       <Box 
         sx={{ 
           py: 8,
-          background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(${fallbackImages.yoga})`,
+          background: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(${images.yoga})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           color: 'white',
@@ -687,11 +1087,12 @@ const HomePage = () => {
             </Grid>
           </Grid>
           
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, flexWrap: 'wrap' }}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center">
             <Button 
               variant="contained" 
               color="secondary" 
               size="large" 
+              startIcon={<PersonAddIcon />}
               sx={{ 
                 py: 1.5, 
                 px: 4, 
@@ -720,7 +1121,22 @@ const HomePage = () => {
             >
               Contact Us
             </Button>
-          </Box>
+            <Button 
+              variant="contained"
+              color="primary"
+              size="large"
+              startIcon={<LoginIcon />}
+              sx={{ 
+                py: 1.5, 
+                px: 4, 
+                fontWeight: 'bold',
+                fontSize: '1rem'
+              }}
+              href="/login"
+            >
+              Member Login
+            </Button>
+          </Stack>
         </Container>
       </Box>
     </Box>
