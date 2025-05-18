@@ -8,34 +8,6 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import HomePage from './components/home/HomePage';
 
-// Sample programs data
-const samplePrograms = [
-  {
-    id: 1,
-    title: "Cricket Academy",
-    description: "Professional cricket training for all age groups",
-    imageUrl: "/images/cricket.jpg"
-  },
-  {
-    id: 2,
-    title: "Tennis Program",
-    description: "Learn tennis from certified coaches",
-    imageUrl: "/images/tennis.jpg"
-  },
-  {
-    id: 3,
-    title: "Swimming Classes",
-    description: "Swimming lessons for beginners to advanced",
-    imageUrl: "/images/swimming.jpg"
-  },
-  {
-    id: 4,
-    title: "Badminton Training",
-    description: "Expert badminton coaching for all levels",
-    imageUrl: "/images/badminton.jpg"
-  }
-];
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -49,9 +21,9 @@ function App() {
           <Header />
           <Box component="main" sx={{ flexGrow: 1 }}>
             <Routes>
-              <Route path="/" element={<HomePage programs={samplePrograms} />} />
+              <Route path="/" element={<HomePage />} />
               {/* Add more routes as needed */}
-              <Route path="*" element={<HomePage programs={samplePrograms} />} />
+              <Route path="*" element={<HomePage />} />
             </Routes>
           </Box>
           <Footer />

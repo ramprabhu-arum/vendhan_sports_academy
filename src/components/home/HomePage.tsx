@@ -30,19 +30,20 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 
-// Import images
-import badmintonImage from '../assets/WhatsApp Image 2025-05-16 at 08.30.56_36c7e06e.jpg';
-import yogaImage from '../assets/WhatsApp Image 2025-05-16 at 08.30.56_3c280aa7.jpg';
-import summerCampImage from '../assets/WhatsApp Image 2025-05-16 at 08.30.56_97a57c1c.jpg';
-import logoImage from '../assets/WhatsApp Image 2025-05-16 at 08.30.56_36c7e06e.jpg';
-import coachImage from '../assets/WhatsApp Image 2025-04-05 at 14.31.15_d7f17d0c.jpg';
-import heroImage from '../assets/WhatsApp Image 2025-04-05 at 14.31.16_9dc6caae.jpg';
-import galleryImage1 from '../assets/WhatsApp Image 2025-05-16 at 08.30.56_2e416228.jpg';
-import galleryImage2 from '../assets/WhatsApp Image 2025-05-16 at 08.30.56_40d856a8.jpg';
-import galleryImage3 from '../assets/WhatsApp Image 2025-05-16 at 08.30.56_94159f91.jpg';
-import galleryImage4 from '../assets/WhatsApp Image 2025-05-16 at 08.30.56_9aabdd31.jpg';
-import galleryImage5 from '../assets/WhatsApp Image 2025-05-16 at 08.30.56_a8ec56c3.jpg';
-import galleryImage6 from '../assets/WhatsApp Image 2025-05-16 at 08.30.56_baaf3af6.jpg';
+// Import placeholder images for development
+// These will be replaced with actual images in production
+const badmintonImage = 'https://source.unsplash.com/random/800x600/?badminton';
+const yogaImage = 'https://source.unsplash.com/random/800x600/?yoga';
+const summerCampImage = 'https://source.unsplash.com/random/800x600/?summer-camp';
+const logoImage = 'https://source.unsplash.com/random/800x600/?sports-logo';
+const coachImage = 'https://source.unsplash.com/random/800x600/?coach';
+const heroImage = 'https://source.unsplash.com/random/1600x900/?sports-academy';
+const galleryImage1 = 'https://source.unsplash.com/random/800x600/?football';
+const galleryImage2 = 'https://source.unsplash.com/random/800x600/?boxing';
+const galleryImage3 = 'https://source.unsplash.com/random/800x600/?sports';
+const galleryImage4 = 'https://source.unsplash.com/random/800x600/?training';
+const galleryImage5 = 'https://source.unsplash.com/random/800x600/?fitness';
+const galleryImage6 = 'https://source.unsplash.com/random/800x600/?athletics';
 
 const programs = [
   {
