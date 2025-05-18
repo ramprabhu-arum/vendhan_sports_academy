@@ -1,20 +1,27 @@
 import React from 'react';
-import { 
-  Box, 
-  Container, 
-  Typography, 
-  Button, 
-  Grid, 
-  Card, 
-  CardContent, 
+import Grid from '@mui/material/Grid';
+import {
+  Card,
   CardMedia,
+  CardContent,
+  Box,
+  Typography,
+  Container,
+  Button,
   useTheme
 } from '@mui/material';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const HomePage: React.FC = () => {
+interface Program {
+  id: number;
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
+const HomePage: React.FC<{ programs: Program[] }> = ({ programs }) => {
   const theme = useTheme();
   
   // Carousel settings
@@ -27,34 +34,6 @@ const HomePage: React.FC = () => {
     autoplay: true,
     autoplaySpeed: 5000,
   };
-
-  // Sample programs data - replace with actual data
-  const programs = [
-    {
-      id: 1,
-      title: 'Cricket Academy',
-      description: 'Professional cricket coaching for all age groups with state-of-the-art facilities.',
-      imageUrl: '/placeholder-cricket.jpg',
-    },
-    {
-      id: 2,
-      title: 'Tennis Training',
-      description: 'Learn tennis from certified coaches on international standard courts.',
-      imageUrl: '/placeholder-tennis.jpg',
-    },
-    {
-      id: 3,
-      title: 'Swimming Classes',
-      description: 'Swimming lessons for beginners to advanced levels in our Olympic-sized pool.',
-      imageUrl: '/placeholder-swimming.jpg',
-    },
-    {
-      id: 4,
-      title: 'Badminton Academy',
-      description: 'Comprehensive badminton training programs for all skill levels.',
-      imageUrl: '/placeholder-badminton.jpg',
-    },
-  ];
 
   return (
     <Box>
@@ -170,90 +149,73 @@ const HomePage: React.FC = () => {
       </Container>
 
       {/* Programs Section */}
-      <Box sx={{ bgcolor: 'background.default', py: 8 }}>
-        <Container maxWidth="lg">
-          <Typography variant="h3" component="h2" gutterBottom align="center" sx={{ mb: 6 }}>
-            Our Programs
-          </Typography>
-          <Grid container spacing={4}>
-            {programs.map((program) => (
-              <Grid item xs={12} sm={6} md={3} key={program.id}>
-                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={program.imageUrl}
-                    alt={program.title}
-                    sx={{ objectFit: 'cover' }}
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h3">
-                      {program.title}
-                    </Typography>
-                    <Typography>
-                      {program.description}
-                    </Typography>
-                  </CardContent>
-                  <Box sx={{ p: 2 }}>
-                    <Button size="small" color="primary" href={`/programs/${program.id}`}>
-                      Learn More
-                    </Button>
-                  </Box>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-          <Box sx={{ textAlign: 'center', mt: 4 }}>
-            <Button variant="contained" color="primary" href="/programs">
-              View All Programs
-            </Button>
-          </Box>
-        </Container>
-      </Box>
-
-      {/* Facilities Section */}
-      <Container maxWidth="lg" sx={{ my: 8 }}>
-        <Typography variant="h3" component="h2" gutterBottom align="center" sx={{ mb: 6 }}>
-          Our Facilities
-        </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ height: '100%' }}>
-              <img 
-                src="/placeholder-facilities.jpg" 
-                alt="Sports facilities" 
-                style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+      <Grid container spacing={4}>
+        {programs.map((program) => (
+          <Grid xs={12} sm={6} md={3} key={program.id}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <CardMedia
+                component="img"
+                height="140"
+                image={program.imageUrl}
+                alt={program.title}
+                sx={{ objectFit: 'cover' }}
               />
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'center' }}>
-              <Typography variant="h4" gutterBottom>
-                State-of-the-Art Infrastructure
-              </Typography>
-              <Typography variant="body1" paragraph>
-                Our academy boasts world-class facilities designed to international standards. We provide the perfect environment for athletes to train and excel in their chosen sports.
-              </Typography>
-              <Typography variant="body1" paragraph>
-                Our facilities include:
-              </Typography>
-              <ul>
-                <Typography component="li" variant="body1">Olympic-sized swimming pool</Typography>
-                <Typography component="li" variant="body1">Indoor and outdoor tennis courts</Typography>
-                <Typography component="li" variant="body1">Cricket ground with professional pitches</Typography>
-                <Typography component="li" variant="body1">Badminton courts with international standard flooring</Typography>
-                <Typography component="li" variant="body1">Modern gymnasium and fitness center</Typography>
-                <Typography component="li" variant="body1">Sports medicine and rehabilitation center</Typography>
-              </ul>
-              <Box sx={{ mt: 2 }}>
-                <Button variant="outlined" color="primary" href="/facilities">
-                  Explore Facilities
+              <CardContent sx={{ flexGrow: 1 }}>
+                <Typography gutterBottom variant="h5" component="h3">
+                  {program.title}
+                </Typography>
+                <Typography>
+                  {program.description}
+                </Typography>
+              </CardContent>
+              <Box sx={{ p: 2 }}>
+                <Button size="small" color="primary" href={`/programs/${program.id}`}>
+                  Learn More
                 </Button>
               </Box>
-            </Box>
+            </Card>
           </Grid>
+        ))}
+      </Grid>
+
+      {/* Facilities Section */}
+      <Grid container spacing={4}>
+        <Grid xs={12} md={6}>
+          <Box sx={{ height: '100%' }}>
+            <img 
+              src="/placeholder-facilities.jpg" 
+              alt="Sports facilities" 
+              style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+            />
+          </Box>
         </Grid>
-      </Container>
+        <Grid xs={12} md={6}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'center' }}>
+            <Typography variant="h4" gutterBottom>
+              State-of-the-Art Infrastructure
+            </Typography>
+            <Typography variant="body1" paragraph>
+              Our academy boasts world-class facilities designed to international standards. We provide the perfect environment for athletes to train and excel in their chosen sports.
+            </Typography>
+            <Typography variant="body1" paragraph>
+              Our facilities include:
+            </Typography>
+            <ul>
+              <Typography component="li" variant="body1">Olympic-sized swimming pool</Typography>
+              <Typography component="li" variant="body1">Indoor and outdoor tennis courts</Typography>
+              <Typography component="li" variant="body1">Cricket ground with professional pitches</Typography>
+              <Typography component="li" variant="body1">Badminton courts with international standard flooring</Typography>
+              <Typography component="li" variant="body1">Modern gymnasium and fitness center</Typography>
+              <Typography component="li" variant="body1">Sports medicine and rehabilitation center</Typography>
+            </ul>
+            <Box sx={{ mt: 2 }}>
+              <Button variant="outlined" color="primary" href="/facilities">
+                Explore Facilities
+              </Button>
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
 
       {/* Call to Action Section */}
       <Box 
