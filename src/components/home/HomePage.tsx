@@ -11,7 +11,6 @@ import {
   useTheme,
   useMediaQuery,
   Paper,
-  Divider,
   Avatar,
   List,
   ListItem,
@@ -30,39 +29,19 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 
-// Use public URLs for images to ensure they work across all environments
-const badmintonImage = '/images/badminton.jpg';
-const yogaImage = '/images/yoga.jpg';
-const summerCampImage = '/images/summer-camp.jpg';
-const coachImage = '/images/coach.jpg';
-const heroImage = '/images/hero.jpg';
-const galleryImage1 = '/images/gallery1.jpg';
-const galleryImage2 = '/images/gallery2.jpg';
-const galleryImage3 = '/images/gallery3.jpg';
-const galleryImage4 = '/images/gallery4.jpg';
-const galleryImage5 = '/images/gallery5.jpg';
-const galleryImage6 = '/images/gallery6.jpg';
-
-// Fallback images from Unsplash in case local images are not available
+// Directly use Unsplash URLs for guaranteed image display
 const fallbackImages = {
-  badminton: 'https://source.unsplash.com/random/800x600/?badminton',
-  yoga: 'https://source.unsplash.com/random/800x600/?yoga',
-  summerCamp: 'https://source.unsplash.com/random/800x600/?summer-camp',
-  coach: 'https://source.unsplash.com/random/800x600/?coach',
-  hero: 'https://source.unsplash.com/random/1600x900/?sports-academy',
-  gallery1: 'https://source.unsplash.com/random/800x600/?football',
-  gallery2: 'https://source.unsplash.com/random/800x600/?boxing',
-  gallery3: 'https://source.unsplash.com/random/800x600/?sports',
-  gallery4: 'https://source.unsplash.com/random/800x600/?training',
-  gallery5: 'https://source.unsplash.com/random/800x600/?fitness',
-  gallery6: 'https://source.unsplash.com/random/800x600/?athletics'
-};
-
-// Helper function to handle image errors
-const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>, fallbackSrc: string) => {
-  const target = e.target as HTMLImageElement;
-  target.onerror = null; // Prevent infinite loop
-  target.src = fallbackSrc;
+  badminton: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  yoga: 'https://images.unsplash.com/photo-1599447292461-69e1a6704d63?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  summerCamp: 'https://images.unsplash.com/photo-1526976668912-1a811878dd37?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  coach: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  hero: 'https://images.unsplash.com/photo-1526232373132-0e4ee643628a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
+  gallery1: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  gallery2: 'https://images.unsplash.com/photo-1517438476312-10d79c077509?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  gallery3: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+  gallery4: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2036&q=80',
+  gallery5: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
+  gallery6: 'https://images.unsplash.com/photo-1502904550040-7534597429ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80'
 };
 
 const programs = [
@@ -70,8 +49,7 @@ const programs = [
     id: 1,
     title: "Badminton Training",
     description: "Professional badminton coaching with focus on fundamental techniques, footwork, and shot selection.",
-    imageUrl: badmintonImage,
-    fallbackUrl: fallbackImages.badminton,
+    imageUrl: fallbackImages.badminton,
     time: "6:30 AM - 8:00 AM",
     icon: <SportsTennisIcon />
   },
@@ -79,8 +57,7 @@ const programs = [
     id: 2,
     title: "Yoga Classes",
     description: "Daily yoga sessions to improve flexibility, strength, and mental focus for athletes of all levels.",
-    imageUrl: yogaImage,
-    fallbackUrl: fallbackImages.yoga,
+    imageUrl: fallbackImages.yoga,
     time: "6:00 AM - 7:00 AM",
     icon: <SportsKabaddiIcon />
   },
@@ -88,8 +65,7 @@ const programs = [
     id: 3,
     title: "Football Training",
     description: "Comprehensive football training program focusing on skills, strategy, and teamwork.",
-    imageUrl: galleryImage1,
-    fallbackUrl: fallbackImages.gallery1,
+    imageUrl: fallbackImages.gallery1,
     time: "8:00 AM - 9:30 AM",
     icon: <SportsSoccerIcon />
   },
@@ -97,8 +73,7 @@ const programs = [
     id: 4,
     title: "Boxing Classes",
     description: "Learn boxing techniques, conditioning, and strategic aspects under expert guidance.",
-    imageUrl: galleryImage3,
-    fallbackUrl: fallbackImages.gallery3,
+    imageUrl: fallbackImages.gallery3,
     time: "6:30 AM - 8:00 AM",
     icon: <FitnessCenterIcon />
   }
@@ -360,100 +335,42 @@ const HomePage = () => {
           </Typography>
         </Box>
 
-        <Grid container spacing={4} alignItems="center">
-          <Grid sx={{ gridColumn: { xs: 'span 12', md: 'span 6' } }}>
-            <Box sx={{ 
-              p: 2, 
-              borderRadius: 2,
-              boxShadow: 3,
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center'
-            }}>
-              <Typography variant="h4" gutterBottom sx={{ fontWeight: 600, color: theme.palette.primary.main }}>
-                Our Approach
-              </Typography>
-              <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <FitnessCenterIcon color="secondary" />
-                  </ListItemIcon>
-                  <ListItemText 
-                    primary="Fundamental Techniques" 
-                    secondary="Grips, footwork, and shot selection tailored to each sport"
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <SportsBaseballIcon color="secondary" />
-                  </ListItemIcon>
-                  <ListItemText 
-                    primary="Conditioning and Physical Training" 
-                    secondary="Specialized programs to build strength, endurance, and agility"
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemIcon>
-                    <SportsKabaddiIcon color="secondary" />
-                  </ListItemIcon>
-                  <ListItemText 
-                    primary="Strategic and Mental Aspects" 
-                    secondary="Developing focus, game strategy, and competitive mindset"
-                  />
-                </ListItem>
-              </List>
-              <Box sx={{ mt: 2 }}>
-                <Button 
-                  variant="contained" 
-                  color="primary"
-                  sx={{ fontWeight: 'bold' }}
-                  href="/about"
-                >
-                  Learn More About Us
-                </Button>
-              </Box>
-            </Box>
-          </Grid>
-          <Grid sx={{ gridColumn: { xs: 'span 12', md: 'span 6' } }}>
-            <Box sx={{ 
-              p: 2, 
-              borderRadius: 2,
-              overflow: 'hidden',
-              height: '100%'
-            }}>
-              <Box sx={{ 
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                p: 3,
-                backgroundColor: theme.palette.grey[100],
-                borderRadius: 2
-              }}>
-                <Avatar 
-                  src={fallbackImages.coach} 
-                  alt="Dr. T. Ganesh Babu"
-                  sx={{ 
-                    width: 150, 
-                    height: 150, 
-                    mb: 2,
-                    border: `4px solid ${theme.palette.secondary.main}`
-                  }}
-                />
-                <Typography variant="h5" gutterBottom sx={{ fontWeight: 600 }}>
-                  Dr. T. Ganesh Babu
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                  B.P.E., M.P.Ed., M.Phil., Ph.D., PG Dip Yoga, PG Dip (S.Psy), CNSNIS (Football)
-                </Typography>
-                <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
-                  "Our coaching philosophy focuses on developing not just athletic skills, but also character, discipline, and sportsmanship."
-                </Typography>
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
+        {/* Coach Profile - Removed "Our Approach" section as requested */}
+        <Box sx={{ 
+          p: 4, 
+          borderRadius: 2,
+          boxShadow: 3,
+          backgroundColor: theme.palette.background.paper,
+          maxWidth: '800px',
+          mx: 'auto'
+        }}>
+          <Box sx={{ 
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center'
+          }}>
+            <Avatar 
+              src={fallbackImages.coach} 
+              alt="Dr. T. Ganesh Babu"
+              sx={{ 
+                width: 150, 
+                height: 150, 
+                mb: 2,
+                border: `4px solid ${theme.palette.secondary.main}`
+              }}
+            />
+            <Typography variant="h5" gutterBottom sx={{ fontWeight: 600 }}>
+              Dr. T. Ganesh Babu
+            </Typography>
+            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+              B.P.E., M.P.Ed., M.Phil., Ph.D., PG Dip Yoga, PG Dip (S.Psy), CNSNIS (Football)
+            </Typography>
+            <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
+              "Our coaching philosophy focuses on developing not just athletic skills, but also character, discipline, and sportsmanship."
+            </Typography>
+          </Box>
+        </Box>
       </Container>
 
       {/* Programs Section */}
@@ -530,10 +447,9 @@ const HomePage = () => {
                   <CardMedia
                     component="img"
                     height="220"
-                    image={program.fallbackUrl}
+                    image={program.imageUrl}
                     alt={program.title}
                     sx={{ objectFit: 'cover' }}
-                    onError={(e) => handleImageError(e, program.fallbackUrl)}
                   />
                   <CardContent sx={{ flexGrow: 1, p: 3 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
